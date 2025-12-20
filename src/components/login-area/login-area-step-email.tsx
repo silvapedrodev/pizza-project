@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { CustomInput } from "../layout/custom-input"
 import { Button } from "../ui/button"
-import { email, z } from 'zod'
+import { z } from 'zod'
 import { api } from "@/lib/axios"
 
 const schema = z.object({
