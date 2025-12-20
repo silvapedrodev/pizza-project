@@ -57,6 +57,7 @@ export const LoginAreaSignup = ({ email }: Props) => {
         email: validData.data.email,
         password: validData.data.password
       })
+      setLoading(false)
       if(!signupReq.data.token) {
         alert(signupReq.data.error)
       } else {
