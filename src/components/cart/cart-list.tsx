@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { CartProduct } from "./cart-product"
 import { decimalToMoney } from "@/lib/utils"
 import { useAuth } from "@/stores/auth"
+import { apiWithAuth } from "@/lib/axios"
 
 export const CartList = () => {
   const auth = useAuth()
@@ -26,6 +27,14 @@ export const CartList = () => {
   }
   useEffect(calculateSubTotal, [cart])
 
+  const handleFinish = async () => {
+    if (cart.items.length > 0) {
+      const orderReq = await apiWithAuth.post('/order/new', {
+        cart: cart.items
+      })
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col gap-3 my-5">
@@ -43,7 +52,7 @@ export const CartList = () => {
       </div>
 
       {auth.token &&
-        <Button className="bg-green-700 hover:bg-green-900">Finalizar Compra</Button>
+        <Button onClick={handleFinish} className="bg-green-700 hover:bg-green-900">Finalizar Compra</Button>
       }
       {!auth.token &&
         <Button onClick={() => auth.setOpen(true)}>Login / Cadastro</Button>
