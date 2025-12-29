@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   const user = await validateAuth(email, password)
   if (!user) return NextResponse.json({ error: 'Acesso negado' })
 
-  const token = createUserToken(user.id)
+  const token = await createUserToken(user.id)
 
   return NextResponse.json({ user, token })
 }
