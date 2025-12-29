@@ -9,10 +9,10 @@ export const apiWithAuth = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/api`
 })
 
-apiWithAuth.interceptors.request.use((async config => {
+apiWithAuth.interceptors.request.use(async config => {
   const token = getCookie('token')
   if (token) {
     config.headers.Authorization = `Token ${token}`
   }
   return config
-}))
+})
