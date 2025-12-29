@@ -47,7 +47,7 @@ export const createUserToken = async (userId: number) => {
   const token = v4()
 
   await prisma.user.update({
-    where: {id: userId},
+    where: { id: userId },
     data: { token }
   })
 
@@ -66,7 +66,7 @@ export const getLoggedUserFromHeader = async () => {
     select: {
       name: true,
       id: true,
-      email: true,
+      email: true
     },
     where: { token }
   })
