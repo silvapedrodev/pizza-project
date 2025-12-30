@@ -32,6 +32,10 @@ export const CartList = () => {
       const orderReq = await apiWithAuth.post('/order/new', {
         cart: cart.items
       })
+
+      if (orderReq.status === 201) {
+        window.location.href = orderReq.data.url
+      }
     }
   }
 
